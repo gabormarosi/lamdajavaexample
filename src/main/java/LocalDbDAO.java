@@ -37,7 +37,7 @@ public class LocalDbDAO {
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
-            output=("status: 500"+"/n"+sw.toString());
+            output=("status: 500"+"\n"+sw.toString());
         }
         return output;
     }
