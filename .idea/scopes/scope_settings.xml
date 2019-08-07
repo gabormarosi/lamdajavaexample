@@ -2,6 +2,5 @@
   <state>
     <unnamed_scope value="lib:*..*" />
     <unnamed_scope value="src:LocalDbDAO" />
-    <deny_rule from_scope="src:LocalDbDAO" to_scope="lib:*..*" is_deny="true" />
   </state>
 </component>

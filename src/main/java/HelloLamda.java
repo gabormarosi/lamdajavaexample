@@ -2,7 +2,7 @@
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.amazonaws.services.services.*;
+//import com.amazonaws.services.services.*;
 import com.amazonaws.services.*;
 
 public class HelloLamda implements RequestHandler<Object, String> {
