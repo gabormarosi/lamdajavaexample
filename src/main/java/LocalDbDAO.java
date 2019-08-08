@@ -3,6 +3,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.PutItemRequest;
+import com.amazonaws.services.dynamodbv2.model.GetItemRequest;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -42,6 +43,27 @@ public class LocalDbDAO {
         return output;
     }
 
+    public String getObjectFromDb(String id){
+        String output;
+        try {
+            AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().withEndpointConfiguration(
+                    new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "x"))
+                    .build();
+            Map<String, AttributeValue> key = new HashMap<String, AttributeValue>();
+            key.put(DYNAMO_TABLE_ID_NAME, new AttributeValue().withS(id));
+            Map<String, AttributeValue> item = client.getItem(new GetItemRequest()
+                    .withTableName(DYNAMO_TABLE_NAME)
+                    .withKey(key))
+                    .getItem();
+            output=item.get("Name").getS();
 
+        } catch (Exception e) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            output=("status: 500"+"\n"+sw.toString());
+        }
+
+        return output;
+    }
 
 }
