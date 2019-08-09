@@ -27,13 +27,14 @@ public class LocalDbDAO {
                     new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "x"))
                     .build();
             Map<String, AttributeValue> attributes = new HashMap<String, AttributeValue>();
-            attributes.put(DYNAMO_TABLE_ID_NAME, new AttributeValue().withS(UUID.randomUUID().toString()));
+            AttributeValue id=new AttributeValue().withS(UUID.randomUUID().toString());
+            attributes.put(DYNAMO_TABLE_ID_NAME, id);
             attributes.put("Status", new AttributeValue().withS(status));
             attributes.put("Name", new AttributeValue().withS(name));
             client.putItem(new PutItemRequest()
                     .withTableName(DYNAMO_TABLE_NAME)
                     .withItem(attributes));
-            output=("Successfully inserted");
+            output=(id.getS());
 
         } catch (Exception e) {
             StringWriter sw = new StringWriter();

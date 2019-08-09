@@ -1,3 +1,7 @@
+import org.junit.Assert;
+
+import java.util.SortedMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LocalDbDAOTest {
@@ -5,9 +9,12 @@ class LocalDbDAOTest {
     @org.junit.jupiter.api.Test
     void LocalDbDAO() {
         LocalDbDAO dao =new LocalDbDAO();
-        dao.putObjectToDb("A","Sarah");
-        System.out.println(dao.getObjectFromDb(
-                "7966a0dc-72ac-49af-8293-d6f0f224b966"));
+        String name="Virgil";
+        String output = dao.putObjectToDb("A",name);
+        System.out.println("output: "+output);
+        String result = dao.getObjectFromDb(output);
+        System.out.println("result: "+result);
+        Assert.assertEquals(name,result);
     }
 
 
